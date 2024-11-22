@@ -17,7 +17,6 @@ from random import randrange,choice,randint
 from threading import Thread
 from ms4 import InfoTik
 from cfonts import render
-import binascii
 
 logo = render('Ilyass', font='block', colors=['yellow', 'cyan'], align='center', space=True)
 
@@ -27,92 +26,27 @@ print('\033[1m'+logo)
 print('\033[1m' + border)
 print('\n'*1)
 
-ID = "7408511525"
-token = "7444216555:AAGOQ0hoEzE2GFsCn9E7Ps307oO96NkZg8Y"
+ID = input('\x1b[38;5;153m' + '\033[1m' + 'Your Id Here:   ')
+token = input('\n'+'\x1b[38;5;141m' + '\033[1m' + 'Your token Here:   ');print('\n')
+
+os.system('clear')
+print('\033[1m' + border)
+print('\033[1m'+logo)
+print('\033[1m' + border)
+print('\n'*1)
 
 badgmail = 0
 badtik = 0
 goodtik = 0
 hits = 0
 
-def resetE(email):
+aa = requests.get('https://pastebin.com/raw/uh7YtXjq').text
 
-	def sign(params, payload: str = None, sec_device_id: str = "", cookie: str = None, aid: int = 1233, license_id: int = 1611921764, sdk_version_str: str = "2.3.1.i18n", sdk_version: int = 2, platform: int = 19, unix: int = None):
-	    x_ss_stub = md5(payload.encode('utf-8')).hexdigest() if payload else None
-	    unix = unix or int(time())
-	    gorgon_value = Gorgon(params, unix, payload, cookie).get_value()
-	    return {
-	        "x-ladon": Ladon.encrypt(unix, license_id, aid),
-	        "x-argus": Argus.get_sign(params, x_ss_stub, unix, platform=platform, aid=aid, license_id=license_id, sec_device_id=sec_device_id, sdk_version=sdk_version_str, sdk_version_int=sdk_version),
-	        **gorgon_value
-	    }
-	
-	secret = secrets.token_hex(16)
-	cookies = {
-	    'passport_csrf_token_default': secret,
-	    'passport_csrf_token': secret
-	}
-	
-	session = requests.Session()
-	session.cookies.update(cookies)
-	
-	url = 'https://api22-normal-c-alisg.tiktokv.com/passport/account_lookup/email/'
-	
-	params = {
-	    "request_tag_from": "h5",
-	    "fixed_mix_mode": "1",
-	    "mix_mode": "1",
-	    "account_param": email,
-	    "scene": "4",
-	    "device_platform": "android",
-	    "os": "android",
-	    "ssmix": "a",
-	    '_rticket': str(round(random.uniform(1.2, 1.6) * 100000000) * -1) + "4632",
-	    'cdid': str(uuid.uuid4()),
-	    "channel": "googleplay",
-	    "aid": "1233",
-	    "app_name": "musical_ly",
-	    "version_code": "360505",
-	    "version_name": "36.5.5",
-	    "manifest_version_code": "2023605050",
-	    "update_version_code": "2023605050",
-	    "build_number": "36.5.5",
-	    "region": "AE",
-	    'ts': str(round(random.uniform(1.2, 1.6) * 100000000) * -1),
-	    'iid': str(random.randint(1, 10**19)),
-	    'device_id': str(random.randint(1, 10**19)),
-	    'openudid': str(binascii.hexlify(os.urandom(8)).decode()),
-	    "support_webview": "1",
-	    "cronet_version": "1c651b66_2024-08-30",
-	    "ttnet_version": "4.2.195.8-tiktok",
-	    "use_store_region_cookie": "1"
-	}
-	
-	mkk = sign(params=urlencode(params), payload='', cookie='')
-	
-	headers = {
-	    'content-type': 'application/x-www-form-urlencoded',
-	    'x-argus': mkk["x-argus"],
-	    'x-gorgon': mkk["x-gorgon"],
-	    'x-khronos': mkk["x-khronos"],
-	    'x-ladon': mkk["x-ladon"],
-	    'x-tt-passport-csrf-token': secret,
-	    'Accept': 'application/json, text/plain, */*',
-	    'User-Agent': 'com.zhiliaoapp.musically/2023605050 (Linux; U; Android 14; ar; SM-S928B; Build/UP1A.231005.007; Cronet/TTNetVersion:1c651b66 2024-08-30 QuicVersion:182d68c8 2024-05-28)'
-	}
-	
-	headers.update(mkk)
-	try:
-		response = session.post(url, params=params, headers=headers)
-		data = response.json().get('data', {})
-		
-		if 'accounts' in data and len(data['accounts']) > 0:
-		    username = data['accounts'][0].get('username', 'No username found')
-		    return f" {username} | {email} "
-		else:
-		    return None
-	except:
-		return None
+if aa == 'ILYAS':
+	pass
+else:
+	print('Stopped')
+	exit()
 
 def info(userr):
 	
@@ -161,7 +95,7 @@ def info(userr):
 	 except:
 	  Bio = 'None'
 	 ff = f'''
-- NeW Tiktok Hits
+	 𝗛𝗜𝗧 𝗔𝗖𝗖𝗢𝗨𝗡𝗧 𝗧𝗜𝗞𝗧𝗢𝗞
 	— — — — — — — — — — — — —
 	- Username : {userr}
 	- Email : {userr}@gmail.com
@@ -175,12 +109,9 @@ def info(userr):
 	- Date : {Date}
 	- Id : {Id}
 	- Bio : {Bio}
-	- Reset : {resetE(userr+'@gmail.com')}
 	— — — — — — — — — — — — —
-- By @FF5UU - @N1z1N
+	- By @FF5UU - @N1z1N
 	''';print(ff)
-	with open ('hits.txt', 'a') as pp:
-		pp.write(ff + '\n')
 	requests.get(f"https://api.telegram.org/bot{token}/sendMessage?chat_id={ID}&text={ff}")
 	
 def play():
@@ -188,7 +119,7 @@ def play():
 	print('\033[1m' + border)
 	print('\033[1m'+logo)
 	print('\033[1m' + border)
-	print(f'          \x1b[1;38;5;46m<hits: {hits}>\x1b[0m | \x1b[1;38;5;196mbadgmail: {badgmail}\x1b[0m | \033[1m\033[1;38;5;32mgoodtik: {goodtik}\x1b[0m | \x1b[1;38;5;21mbadtik: {badtik}\x1b[0m')
+	print(f'          \x1b[1;38;5;46mhits: {hits}\x1b[0m | \x1b[1;38;5;196mbadgmail: {badgmail}\x1b[0m | \033[1m\033[1;38;5;32mgoodtik: {goodtik}\x1b[0m | \x1b[1;38;5;21mbadtik: {badtik}\x1b[0m')
 
 def sign(params, payload: str = None, sec_device_id: str = "", cookie: str or None = None, aid: int = 1233, license_id: int = 1611921764, sdk_version_str: str = "2.3.1.i18n", sdk_version: int =2, platform: int = 19, unix: int = None):
     x_ss_stub = md5(payload.encode('utf-8')).hexdigest() if payload is not None else None
@@ -468,11 +399,9 @@ def check_gmail(email):
               data=data,
           ).text
           if 'password' in response:
-            
             hits+=1
             play()
             userr = email.split('@')[0]
-            
             info(userr)
           else:
             badgmail+=1
@@ -554,7 +483,7 @@ def rrandom():
           check2(email)
         elif iko == '2':
            fol = users['user_info']['follower_count']
-           if int(fol) >= 100:
+           if int(fol) >= 400:
             email = user + '@gmail.com'
             check2(email)
         else:
@@ -562,5 +491,5 @@ def rrandom():
         	exit()
   except:''
 
-for _ in range (7):
+for _ in range (6):
 	Thread(target=rrandom).start()
